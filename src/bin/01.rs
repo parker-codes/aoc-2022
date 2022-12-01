@@ -10,7 +10,24 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    None
+    let elf_tallies = input
+        .split_terminator("\n\n")
+        .map(|list| {
+            list.lines()
+                .filter_map(|s| -> Option<u32> { s.parse().ok() })
+                .sum()
+        })
+        .into_iter();
+
+    // let first: u32 = elf_tallies.clone().max().take().unwrap();
+    // let second = elf_tallies.clone().max().take().unwrap();
+    // let third = elf_tallies.max().take().unwrap();
+
+    // println!("First: {first}, Second: {second}, Third: {third}");
+
+    // Some(first + second + third)
+
+    Some(1)
 }
 
 fn main() {
@@ -32,6 +49,6 @@ mod tests {
     #[test]
     fn test_part_two() {
         let input = advent_of_code::read_file("examples", 1);
-        assert_eq!(part_two(&input), None);
+        assert_eq!(part_two(&input), Some(45_000));
     }
 }
